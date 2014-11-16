@@ -1,5 +1,6 @@
 require 'sinatra'
 require 'data_mapper'
+require 'json'
 
 DATABASE="test_police_data.db"
 
@@ -17,7 +18,6 @@ class Incident
     property :coordinates, String
     property :datetime, DateTime
     property :abs_time, Integer
-
 end
 
 class Calls
@@ -33,5 +33,15 @@ DataMapper.finalize
 
 ## Routes
 get '/' do
-    'Hello, world!'
+    File.read('public/index.html')
+end
+
+get '/calls' do
+    content_type :json
+    Calls.all.to_json
+end
+
+get '/incidents' do
+    content_type :json
+    Incidents.all.to_json
 end
