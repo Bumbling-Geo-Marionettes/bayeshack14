@@ -11,7 +11,7 @@ begin
     puts "WARNING: This will delete the existing database if it exists!"
     File.delete DATABASE if File.exist? DATABASE
 
-    db = SQLite3::Database.open "police_data.db"
+    db = SQLite3::Database.open DATABASE
 
     # Create calls table
     puts "Creating table Calls..."
