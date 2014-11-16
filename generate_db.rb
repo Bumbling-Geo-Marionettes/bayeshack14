@@ -1,9 +1,9 @@
 require 'sqlite3'
 require 'csv'
 
-CALLS="./calls.csv"
-INCIDENTS="./incidents.csv"
-DATABASE="./police_data.db"
+CALLS="./test_calls.csv"
+INCIDENTS="./test_incidents.csv"
+DATABASE="./test_police_data.db"
 
 begin
     # Create database
@@ -36,7 +36,7 @@ begin
         location TEXT, coordinates TEXT, datetime TEXT)"
 
     # Read incidents.csv
-    puts "Populating Calls..."
+    puts "Populating Incidents..."
     CSV.foreach(INCIDENTS, {:headers => :first_row}) do |row|
         row.each {|v| v[1].gsub!("'", "''") if not v[1].nil?}
         query = "INSERT INTO Incidents VALUES(#{row["INCIDENT_ID"]}," +
